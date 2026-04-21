@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>怠惰のガガガ - POP ART EDITION</title>
+    <link href="./style.css" rel="stylesheet">
+  </head>
+  <body class="antialiased selection:bg-pop-pink selection:text-white bg-[#f8f9fa] text-[#111111]">
+
+    <!-- Playful Parallax Pop Background -->
+    <div id="ga-bg-container" class="fixed inset-0 pointer-events-none overflow-hidden z-0 opacity-40"></div>
+
+    <!-- 1. Hero Section (ファーストビュー) -->
+    <section id="hero" class="relative w-full h-screen overflow-hidden flex flex-col items-center justify-center z-10 border-b-[8px] border-black bg-white">
+      
+      <!-- Pattern background (subtle dots) -->
+      <div class="absolute inset-0 opacity-[0.03] z-0" style="background-image: radial-gradient(black 2px, transparent 2px); background-size: 20px 20px; background-position: 0 0;"></div>
+
+      <!-- Copy text -->
+      <div id="hero-copy" class="absolute top-[18%] w-full text-center z-30">
+         <p class="font-display text-2xl md:text-5xl font-black tracking-widest text-[#111] bg-white border-4 border-black inline-block px-6 py-3 pop-shadow-pink gagaga-text hover:animate-shake cursor-pointer" data-text="ただ聴くだけの退屈な時間は、ここで終わる。">
+           ただ聴くだけの退屈な時間は、ここで終わる。
+         </p>
+      </div>
+
+      <!-- Center Logo -->
+      <div class="relative z-20 p-4 mt-10 md:mt-20 w-[90%] md:max-w-4xl flex justify-center group cursor-pointer transition-transform duration-300 transform" id="logo-container">
+        <!-- Main Graphic Logo - Pop Art Style -->
+        <img src="/logo-horizontal.png" alt="怠惰のガガガ" class="w-full h-auto drop-shadow-2xl transition-all duration-300 group-hover:scale-105 group-hover:animate-shake" />
+      </div>
+
+      <!-- Mascot Image -->
+      <div id="hero-mascot" class="absolute bottom-10 right-10 md:bottom-20 md:right-32 z-20 w-48 md:w-64 xl:w-96 transition-all duration-1000 ease-out origin-bottom transform mascot-float hover:scale-110 cursor-pointer drop-shadow-xl">
+        <img src="/mascot.webp" alt="ミニキャラ" class="w-full h-auto" id="hero-mascot-img" />
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="absolute bottom-5 left-1/2 -translate-x-1/2 flex flex-col items-center animate-bounce text-black font-bold">
+        <span class="text-xs tracking-widest mb-2 font-display">SCROLL</span>
+        <div class="w-[4px] h-16 bg-pop-pink border-2 border-black"></div>
+      </div>
+    </section>
+
+    <!-- 2 & 3. Members Section (OTO MART Matrix Grid) -->
+    <section id="members" class="relative w-full py-32 z-20 border-b-[8px] border-black bg-[#f4f6f8]">
+
+      <div class="container mx-auto px-4 max-w-7xl relative z-10">
+        <div class="text-center mb-16">
+          <h2 class="font-display text-5xl md:text-7xl font-black text-white bg-black pop-shadow-blue inline-block px-8 py-2 transform -rotate-2 hover:rotate-2 transition-transform cursor-pointer gagaga-text border-4 border-black" data-text="MEMBERS">
+            MEMBERS
+          </h2>
+        </div>
+        
+        <!-- Rendered dynamically via main.js -->
+        <div id="members-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6 relative z-20">
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Step-up Offer (Mascot Floating upwards) -->
+    <section id="stepup" class="relative w-full py-32 border-b-[8px] border-black bg-[#eef1f5]">
+      <div class="container mx-auto px-6 max-w-4xl relative z-10 flex flex-col items-center">
+        <h2 class="font-display text-4xl md:text-5xl font-black text-black mb-16 text-center bg-pop-orange border-4 border-black px-6 py-2 pop-shadow-black transform rotate-1 gagaga-text" data-text="オープンチャット参加特典">
+           オープンチャット参加特典
+        </h2>
+        
+        <!-- The visual representations for the steps -->
+        <div class="relative w-full max-w-md h-[500px] flex items-center justify-center bg-white border-4 border-black pop-shadow-black p-8">
+           <!-- The Progress Bar (Vertical) -->
+           <div class="w-12 h-full bg-gray-200 border-4 border-black rounded-full overflow-hidden relative flex flex-col justify-end">
+              <!-- Fill -->
+              <div id="progress-fill" class="w-full bg-pop-pink transition-all duration-[3000ms] ease-out border-t-4 border-black" style="height: 0%;"></div>
+           </div>
+
+           <!-- Scale Marks -->
+           <div class="flex flex-col justify-between h-full py-4 ml-8 font-display text-2xl font-black text-black pointer-events-none">
+              <div class="flex items-center"><span class="w-6 h-2 bg-black mr-2"></span>300人</div>
+              <div class="flex items-center"><span class="w-6 h-2 bg-black mr-2"></span>200人</div>
+              <div class="flex items-center"><span class="w-6 h-2 bg-black mr-2"></span>100人</div>
+              <div class="flex items-center"><span class="w-6 h-2 bg-black mr-2"></span>50人</div>
+           </div>
+
+           <!-- Mascot image that will float alongside the progress bar -->
+           <div id="progress-mascot" class="absolute left-[-50px] bottom-[10%] w-40 md:w-56 transition-all duration-[3000ms] ease-out z-20 drop-shadow-xl">
+             <img src="/mascot.webp" alt="floating mascot" class="w-full h-auto mascot-float" />
+           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. CTA Section (最後の一押し) -->
+    <section id="cta" class="relative w-full py-40 flex items-center justify-center overflow-hidden bg-white z-20">
+      
+      <!-- Pop art dots -->
+      <div class="absolute inset-0 z-0 opacity-[0.05]" style="background-image: radial-gradient(#111 4px, transparent 4px); background-size: 30px 30px; background-position: 0 0;"></div>
+
+      <div class="relative z-10 flex flex-col md:flex-row items-center justify-center gap-10 w-full max-w-5xl px-8">
+        
+        <!-- Hovering Mascot gazing -->
+        <div class="w-56 h-56 mascot-float flex-shrink-0 z-20 -rotate-12 hover:rotate-12 transition-transform drop-shadow-2xl">
+          <img src="/mascot.webp" alt="見つめるマスコット" class="w-full h-auto object-contain" />
+        </div>
+
+        <!-- Pop CTA Button -->
+        <a href="#" id="cta-button" class="group relative flex items-center justify-center w-full max-w-[450px] h-[120px] bg-black text-white font-display text-4xl font-black border-4 border-black pop-shadow-pink transition-all duration-75 hover:translate-x-1 hover:translate-y-1 hover:box-shadow-none hover:bg-pop-pink overflow-hidden">
+          
+          <span class="relative z-10 group-hover:hidden tracking-wider">怠惰組に参加する</span>
+          
+          <!-- Intense Glitch Text on Hover -->
+          <span class="hidden group-hover:block relative z-20 font-black text-5xl gagaga-text text-pop-orange animate-shake" data-text="ガガガガガガ！">
+            ガガガガガガ！
+          </span>
+          
+        </a>
+
+      </div>
+    </section>
+
+    <footer class="w-full py-10 text-center bg-[#111] text-white relative z-30 font-body border-t-[8px] border-pop-orange">
+      <p class="font-black tracking-widest text-lg">© 2026 怠惰のガガガ.</p>
+    </footer>
+
+    <script type="module" src="/main.js"></script>
+    <style>
+      .text-stroke-2 { -webkit-text-stroke-width: 2px; }
+      .text-stroke-black { -webkit-text-stroke-color: black; }
+    </style>
+  </body>
+</html>

@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Yuji+Syuku&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Yuji Syuku", serif;
+  --font-body: "Inter", sans-serif;
+  --color-pop-pink: #ff66b2;
+  --color-pop-orange: #ff9900;
+  --color-pop-blue: #00ccff;
+  --color-pop-white: #ffffff;
+  --color-pop-black: #111111;
+}
+
+@layer base {
+  body {
+    background-color: #f4f6f8;
+    color: #111111;
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    /* Extra thick yellow border around the exact window edge */
+    box-sizing: border-box;
+    border: 16px solid #ffcc00;
+    min-height: 100vh;
+  }
+  
+  @media (min-width: 768px) {
+    body {
+      border-width: 24px;
+    }
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    letter-spacing: 0.1em;
+  }
+}
+
+/* Pop Art Solid Borders & Shadows */
+.pop-border {
+  border: 4px solid #111;
+}
+
+.pop-shadow-black {
+  box-shadow: 6px 6px 0px #111;
+}
+
+.pop-shadow-pink {
+  box-shadow: 6px 6px 0px var(--color-pop-pink);
+}
+
+.pop-shadow-blue {
+  box-shadow: 6px 6px 0px var(--color-pop-blue);
+}
+
+/* Mask utility for Ga logo */
+.mask-ga {
+  -webkit-mask-image: url('/ga-logo.png');
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-image: url('/ga-logo.png');
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+}
+
+/* Base Panel Styles */
+.oto-panel {
+  transition: all 0.2s cubic-bezier(0.8, 0, 0.2, 1);
+}
+
+.oto-panel:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 9px 9px 0px #111;
+  z-index: 50;
+}
+
+/* Text Glitch Effect */
+.gagaga-text {
+  position: relative;
+  display: inline-block;
+}
+
+.gagaga-text::before,
+.gagaga-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  opacity: 0; pointer-events: none;
+}
+
+.group:hover .gagaga-text::before,
+.is-glitching .gagaga-text::before {
+  opacity: 1; color: var(--color-pop-pink); z-index: -1;
+  animation: glitch-color-1 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+}
+
+.group:hover .gagaga-text::after,
+.is-glitching .gagaga-text::after {
+  opacity: 1; color: var(--color-pop-blue); z-index: -2;
+  animation: glitch-color-2 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+}
+
+/* Element Shake */
+.animate-shake {
+  animation: shake 0.1s infinite;
+}
+.group-hover-shake {
+  transition: all 0.2s;
+}
+.group:hover .group-hover-shake {
+  animation: shake 0.1s infinite;
+}
+
+/* Animations */
+@keyframes shake {
+  0% { transform: translate(0) }
+  20% { transform: translate(-4px, 4px) }
+  40% { transform: translate(4px, -4px) }
+  60% { transform: translate(-4px, -4px) }
+  80% { transform: translate(4px, 4px) }
+  100% { transform: translate(0) }
+}
+
+@keyframes glitch-color-1 {
+  0% { clip-path: inset(10% 0 80% 0); transform: translate(-3px, 3px); }
+  20% { clip-path: inset(80% 0 5% 0); transform: translate(3px, -3px); }
+  40% { clip-path: inset(40% 0 40% 0); transform: translate(-3px, 3px); }
+  60% { clip-path: inset(20% 0 60% 0); transform: translate(3px, -3px); }
+  80% { clip-path: inset(60% 0 20% 0); transform: translate(-3px, 3px); }
+  100% { clip-path: inset(30% 0 50% 0); transform: translate(3px, -3px); }
+}
+
+@keyframes glitch-color-2 {
+  0% { clip-path: inset(80% 0 10% 0); transform: translate(3px, -3px); }
+  20% { clip-path: inset(5% 0 80% 0); transform: translate(-3px, 3px); }
+  40% { clip-path: inset(40% 0 40% 0); transform: translate(3px, -3px); }
+  60% { clip-path: inset(60% 0 20% 0); transform: translate(-3px, 3px); }
+  80% { clip-path: inset(20% 0 60% 0); transform: translate(3px, -3px); }
+  100% { clip-path: inset(50% 0 30% 0); transform: translate(-3px, 3px); }
+}
+
+/* Mascot Animations */
+.mascot-float {
+  animation: float-anim 4s ease-in-out infinite;
+}
+
+@keyframes float-anim {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(3deg); }
+}
+
+@keyframes fast-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-40%); } }
+.animate-fast-bounce { animation: fast-bounce 0.4s infinite cubic-bezier(0.8, 0, 0.2, 1); }
+
+@keyframes smooth-float { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-30%) rotate(2deg); } }
+.animate-smooth-float { animation: smooth-float 4s infinite ease-in-out; }
+
+@keyframes spin-float { 0% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-50%) rotate(180deg); } 100% { transform: translateY(0) rotate(360deg); } }
+.animate-spin-float { animation: spin-float 6s infinite linear; }
+
+@keyframes dynamic-float { 0% { transform: translateY(0) scale(1) rotate(0); } 25% { transform: translateY(-40%) scale(1.2) rotate(15deg); } 50% { transform: translateY(-20%) scale(0.9) rotate(-15deg); } 75% { transform: translateY(-50%) scale(1.3) rotate(10deg); } 100% { transform: translateY(0) scale(1) rotate(0); } }
+.animate-dynamic-float { animation: dynamic-float 2s infinite ease-in-out; }
+
+/* Dedicated Icon Glitches Maintained! */
+.icon-glitch { position: relative; transition: filter 0.2s; }
+.group:hover .icon-glitch {
+  animation: shake 0.1s infinite;
+  filter: drop-shadow(-5px 5px 0px rgba(255, 0, 127, 0.8)) drop-shadow(5px -5px 0px rgba(0, 243, 255, 0.8)) saturate(150%) hue-rotate(15deg);
+}
+
+.icon-glitch-orange { position: relative; transition: filter 0.2s; }
+.group:hover .icon-glitch-orange {
+  animation: shake 0.08s infinite alternate-reverse;
+  filter: drop-shadow(-8px 2px 0px rgba(255, 94, 0, 0.9)) drop-shadow(8px -2px 0px rgba(255, 200, 0, 0.7)) saturate(200%);
+}
+
+.icon-glitch-blue { position: relative; transition: filter 0.2s; }
+.group:hover .icon-glitch-blue {
+  animation: shake 0.15s infinite;
+  filter: drop-shadow(-6px 4px 0px rgba(0, 243, 255, 0.8)) drop-shadow(6px -4px 0px rgba(136, 204, 255, 0.8)) brightness(120%) hue-rotate(-10deg);
+}
+
+.icon-glitch-white { position: relative; transition: filter 0.2s; }
+.group:hover .icon-glitch-white {
+  animation: shake 0.1s infinite alternate;
+  filter: drop-shadow(-8px 8px 10px rgba(255, 255, 255, 1)) drop-shadow(8px -8px 0px rgba(200, 200, 200, 0.8)) brightness(150%) contrast(150%);
+}
+
+.icon-glitch-black { position: relative; transition: filter 0.2s; }
+.group:hover .icon-glitch-black {
+  animation: shake 0.05s infinite;
+  filter: drop-shadow(-10px 5px 0px rgba(0, 0, 0, 0.9)) drop-shadow(10px -5px 0px rgba(100, 100, 100, 0.9)) contrast(200%) grayscale(100%);
+}
