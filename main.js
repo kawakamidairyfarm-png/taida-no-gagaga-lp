@@ -73,6 +73,8 @@ const membersData = [
 
 document.addEventListener('DOMContentLoaded', () => {
   generateGaBackground();
+  generateGaLining('ga-lining-1', 0);
+  generateGaLining('ga-lining-2', 1);
   initHeroAnimations();
   renderMembers(); // Add render call
   initStepUpAnimation();
@@ -86,32 +88,52 @@ const popColors = [
   '#111111'  // Black
 ];
 
+function generateGaLining(containerId, offset) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  // Create a continuous line of logos
+  const count = 40; 
+  for (let i = 0; i < count; i++) {
+    const el = document.createElement('div');
+    const color = popColors[(i + offset) % popColors.length];
+    el.className = 'ga-lining-item mask-ga';
+    el.style.backgroundColor = color;
+    container.appendChild(el);
+  }
+
+  // Animate the line (scrolling effect)
+  gsap.to(container, {
+    x: '-50%',
+    duration: 20,
+    ease: 'none',
+    repeat: -1
+  });
+}
+
 function generateGaBackground() {
   const container = document.getElementById('ga-bg-container');
   if (!container) return;
 
-  const numLogos = 35; // Fewer logos for a cleaner pop art feel
+  const numLogos = 45; // Increased slightly for more playfulness
   const windowHeight = document.documentElement.scrollHeight;
   const windowWidth = document.documentElement.scrollWidth;
 
   for (let i = 0; i < numLogos; i++) {
     const el = document.createElement('div');
     const color = popColors[Math.floor(Math.random() * popColors.length)];
-    const size = Math.floor(Math.random() * 400) + 150; // 150px to 550px
+    const size = Math.floor(Math.random() * 350) + 100; // slightly smaller but more of them
     const top = Math.random() * windowHeight;
     const left = Math.random() * windowWidth;
     const rot = Math.random() * 360;
     
-    // Playful rotation animation duration
-    const animRotDuration = (Math.random() * 20) + 10;
+    const animRotDuration = (Math.random() * 25) + 15;
     const rotDir = Math.random() > 0.5 ? 1 : -1;
 
-    el.className = 'absolute mask-ga pointer-events-none mix-blend-multiply';
+    el.className = 'absolute mask-ga pointer-events-none mix-blend-multiply opacity-30';
     if (color === '#111111') {
        el.classList.remove('mix-blend-multiply');
-       el.style.opacity = '0.1'; // Make black logos very faint
-    } else {
-       el.style.opacity = '0.6'; // Colorful ones more solid
+       el.style.opacity = '0.05';
     }
 
     Object.assign(el.style, {
@@ -120,10 +142,10 @@ function generateGaBackground() {
       backgroundColor: color,
       top: `${top}px`,
       left: `${left}px`,
-      transform: `translate(-50%, -50%) rotate(${rot}deg)`
+      transform: `translate(-50%, -50%) rotate(${rot}deg)`,
+      zIndex: -1
     });
 
-    // Make them slowly spin
     gsap.to(el, {
       rotation: rot + (360 * rotDir),
       duration: animRotDuration,
@@ -133,10 +155,20 @@ function generateGaBackground() {
 
     container.appendChild(el);
 
-    // Subtle parallax float
-    const scrollSpeed = (Math.random() * 0.5) - 0.25; 
+    // Dynamic floating effect
     gsap.to(el, {
-      y: () => scrollSpeed * 1000,
+      x: `+=${(Math.random() - 0.5) * 200}`,
+      y: `+=${(Math.random() - 0.5) * 200}`,
+      duration: (Math.random() * 5) + 5,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut"
+    });
+
+    // Parallax
+    const scrollSpeed = (Math.random() * 0.4) - 0.2; 
+    gsap.to(el, {
+      y: () => scrollSpeed * 1200,
       ease: "none",
       scrollTrigger: {
         trigger: "body",
