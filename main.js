@@ -236,6 +236,12 @@ function renderMembers() {
     let nameHtml = `<span class="font-display ${nameTextSize} font-black ${textColor} ${strokeClass} group-hover-shake gagaga-text z-20 pointer-events-none transition-opacity duration-300 ${isMobile ? 'opacity-0 hidden' : 'group-hover:opacity-0'}" style="transform: rotate(${member.rotation});" data-text="${member.name}">${member.name}</span>`;
     let mobileNameLabel = isMobile ? `<div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-40 bg-black/80 border-2 border-[#ff66b2] px-6 py-2 rounded-lg text-white font-black text-xl tracking-widest gagaga-text whitespace-nowrap shadow-[0_0_15px_rgba(255,102,178,0.5)]" data-text="${member.name}">${member.name}</div>` : '';
 
+    let contentHtml = `
+      <div class="absolute inset-0 z-20 flex items-center justify-center pointer-events-none transition-opacity duration-300">
+        ${nameHtml}
+      </div>
+    `;
+
     if (member.icon && member.link) {
       const iconOpacity = isMobile ? 'opacity-100' : 'opacity-0 group-hover:opacity-100';
       contentHtml = `
