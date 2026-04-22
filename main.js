@@ -71,8 +71,30 @@ document.addEventListener('DOMContentLoaded', () => {
   generateGaLining('ga-lining-1', 0);
   generateGaLining('ga-lining-2', 1);
   initHeroAnimations();
-  renderMembers(); // Add render call
+  renderMembers(); 
   initStepUpAnimation();
+
+  // URL Copy function
+  const copyBtn = document.getElementById('copy-url-btn');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', () => {
+      const url = 'https://taida-no-gagaga-lp.vercel.app/';
+      navigator.clipboard.writeText(url).then(() => {
+        const btnText = copyBtn.querySelector('.btn-text');
+        const originalText = btnText.textContent;
+        
+        btnText.textContent = 'コピーしました！';
+        copyBtn.classList.add('copied');
+        
+        setTimeout(() => {
+          btnText.textContent = originalText;
+          copyBtn.classList.remove('copied');
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+    });
+  }
 });
 
 const popColors = [

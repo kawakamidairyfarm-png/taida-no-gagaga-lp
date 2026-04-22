@@ -55,6 +55,10 @@
   box-shadow: 6px 6px 0px var(--color-pop-pink);
 }
 
+.pop-shadow-orange {
+  box-shadow: 6px 6px 0px #ff9800;
+}
+
 .pop-shadow-blue {
   box-shadow: 6px 6px 0px var(--color-pop-blue);
 }
@@ -293,5 +297,13 @@
 
 @media (min-width: 768px) {
   /* Removed speech bubble arrow in centered layout */
+}
+
+/* Copy URL Button Feedback */
+#copy-url-btn.copied {
+  background-color: #ff9800 !important;
+  color: white !important;
+  box-shadow: 0 0 20px #ff9800, 4px 4px 0px black !important;
+  transform: scale(0.98);
 }
 
