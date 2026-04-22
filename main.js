@@ -115,15 +115,16 @@ function generateGaBackground() {
   const container = document.getElementById('ga-bg-container');
   if (!container) return;
 
-  const isMobile = window.innerWidth < 768;
-  const numLogos = isMobile ? 20 : 45; // 50% fewer logos on mobile
+  // Use a more robust check or lower threshold
+  const isMobile = window.innerWidth < 768 || window.matchMedia("(max-width: 767px)").matches;
+  const numLogos = isMobile ? 15 : 45; // Even fewer for extreme clarity
   const windowHeight = document.documentElement.scrollHeight;
   const windowWidth = document.documentElement.scrollWidth;
 
   for (let i = 0; i < numLogos; i++) {
     const el = document.createElement('div');
     const color = popColors[Math.floor(Math.random() * popColors.length)];
-    const size = Math.floor(Math.random() * (isMobile ? 200 : 350)) + 100;
+    const size = Math.floor(Math.random() * (isMobile ? 180 : 350)) + 100;
     const top = Math.random() * windowHeight;
     const left = Math.random() * windowWidth;
     const rot = Math.random() * 360;
@@ -131,14 +132,14 @@ function generateGaBackground() {
     const animRotDuration = (Math.random() * 25) + 15;
     const rotDir = Math.random() > 0.5 ? 1 : -1;
 
-    // Mobile: super faint background logos (0.1) for better readability
-    const baseOpacity = isMobile ? 0.1 : 0.3; 
+    // Mobile: Extremely faint (0.07) to ensure 100% readability
+    const baseOpacity = isMobile ? 0.07 : 0.3; 
     el.className = 'absolute mask-ga pointer-events-none mix-blend-multiply';
     el.style.opacity = baseOpacity;
 
     if (color === '#111111') {
        el.classList.remove('mix-blend-multiply');
-       el.style.opacity = isMobile ? '0.02' : '0.05';
+       el.style.opacity = isMobile ? '0.01' : '0.05';
     }
 
     Object.assign(el.style, {
@@ -162,9 +163,9 @@ function generateGaBackground() {
 
     // Dynamic floating effect
     gsap.to(el, {
-      x: `+=${(Math.random() - 0.5) * (isMobile ? 100 : 200)}`,
-      y: `+=${(Math.random() - 0.5) * (isMobile ? 100 : 200)}`,
-      duration: (Math.random() * 5) + 5,
+      x: `+=${(Math.random() - 0.5) * (isMobile ? 80 : 200)}`,
+      y: `+=${(Math.random() - 0.5) * (isMobile ? 80 : 200)}`,
+      duration: (Math.random() * 6) + 6,
       repeat: -1,
       yoyo: true,
       ease: "sine.inOut"
@@ -189,12 +190,14 @@ function renderMembers() {
   const grid = document.getElementById('members-grid');
   if (!grid) return;
 
+  const isMobile = window.innerWidth < 768 || window.matchMedia("(max-width: 767px)").matches;
+
   grid.innerHTML = membersData.map(member => {
     if (member.type === 'placeholder') {
       const textColor = member.textWhite ? 'text-white' : '';
       const textClass = member.isText ? 'font-display text-lg md:text-2xl font-black' : 'text-4xl md:text-6xl font-black';
       return `
-        <div class="reveal-init member-panel-container group relative w-full aspect-square pop-border oto-panel pop-shadow-black flex items-center justify-center" style="background-color: ${member.bgColor}">
+        <div class="reveal-init member-panel-container group relative aspect-square pop-border oto-panel pop-shadow-black flex items-center justify-center" style="background-color: ${member.bgColor}">
           <span class="${textClass} opacity-30 group-hover-shake ${textColor}">${member.content}</span>
         </div>
       `;
@@ -209,9 +212,7 @@ function renderMembers() {
     const iGlitch = member.iconGlitchClass || 'icon-glitch';
     const mAnim = member.mascotAnimClass || 'animate-bounce';
     
-    // Icon rendering if present
-    const isMobile = window.innerWidth < 768;
-    const nameTextSize = isMobile ? 'text-xl' : (member.name.length > 4 ? 'text-2xl' : 'text-3xl');
+    const nameTextSize = isMobile ? 'text-2xl' : (member.name.length > 4 ? 'text-2xl' : 'text-3xl');
     let contentHtml = `<span class="font-display ${nameTextSize} font-black ${textColor} ${strokeClass} group-hover-shake gagaga-text z-20 pointer-events-none transition-opacity duration-300 group-hover:opacity-0" style="transform: rotate(${member.rotation});" data-text="${member.name}">${member.name}</span>`;
     
     if (member.icon && member.link) {
@@ -226,10 +227,11 @@ function renderMembers() {
     }
 
     return `
-      <div class="reveal-init member-panel-container group relative w-full aspect-square cursor-pointer flex items-center justify-center pop-border oto-panel ${shadowClass} transition-colors duration-300 ${member.hoverColorClass || ''}" style="background-color: ${member.bgColor}">
+      <div class="reveal-init member-panel-container group relative aspect-square cursor-pointer flex items-center justify-center pop-border oto-panel ${shadowClass} transition-colors duration-300 ${member.hoverColorClass || ''}" style="background-color: ${member.bgColor}">
         ${contentHtml}
-        <div class="absolute inset-x-0 bottom-0 h-1/2 flex items-end justify-center translate-y-full group-hover:translate-y-4 transition-transform duration-200 z-10 pointer-events-none">
-           <img src="/mascot.webp" class="w-full h-full object-cover ${mAnim} opacity-80 mix-blend-screen" alt="ひょっこり" />
+        <!-- Mascot - Reduced and Relocated for Mobile -->
+        <div class="absolute bottom-1 right-1 w-12 h-12 md:inset-x-0 md:bottom-0 md:h-1/2 flex items-end justify-end md:justify-center translate-y-0 md:translate-y-full md:group-hover:translate-y-4 transition-transform duration-200 z-10 pointer-events-none">
+           <img src="/mascot.webp" class="w-8 h-8 md:w-full md:h-full object-contain ${mAnim} opacity-40 md:opacity-80 mix-blend-screen" alt="ひょっこり" />
         </div>
       </div>
     `;

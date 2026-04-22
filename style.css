@@ -165,10 +165,12 @@
   }
   /* Mobile Member Panel Optimizations */
   .member-panel-container {
-    width: 90% !important;
+    width: 90vw !important;
+    max-width: 400px;
+    aspect-ratio: 1 / 1;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 2rem; /* my-8 equivalent approx */
+    margin-bottom: 3rem !important; /* Force separate stack */
   }
 }
 
