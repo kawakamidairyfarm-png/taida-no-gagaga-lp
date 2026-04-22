@@ -278,7 +278,7 @@
 
 .step-badge {
   background-color: #00ffff;
-  color: #000000;
+  color: #ffffff; /* Improved contrast on cyan */
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 9999px;
@@ -292,15 +292,6 @@
 }
 
 @media (min-width: 768px) {
-  .speech-bubble::after {
-    content: '';
-    position: absolute;
-    left: -20px;
-    top: 50%;
-    transform: translateY(-50%);
-    border-width: 10px 20px 10px 0;
-    border-style: solid;
-    border-color: transparent #00ffff transparent transparent;
-  }
+  /* Removed speech bubble arrow in centered layout */
 }
 

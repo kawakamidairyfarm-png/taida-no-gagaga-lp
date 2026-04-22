@@ -69,39 +69,38 @@
         <div id="members-grid" class="flex flex-col items-center md:grid md:grid-cols-4 lg:grid-cols-5 gap-8 md:gap-6 relative z-20 w-full">
         </div>
 
-        <!-- HOW_TO_LISTEN Section (New) -->
-        <div id="how-to-listen" class="mt-20 md:mt-32 py-10 md:py-0 flex flex-col md:flex-row items-center gap-12 relative z-30">
-          <!-- Left: Big Illustration -->
-          <div class="w-full md:w-1/2 flex justify-center reveal-init">
-             <img src="/mascot.png" alt="ミニキャラ" class="w-[80%] md:w-full max-w-md h-auto drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]" />
-          </div>
-          <!-- Right: Speech Bubble -->
-          <div class="w-[95%] md:w-1/2 relative reveal-init px-2 md:px-0">
-             <div class="speech-bubble neon-border-cyan p-8 md:p-12 text-white shadow-2xl">
-                <h2 class="font-display text-4xl md:text-5xl font-black mb-10 gagaga-text text-pop-blue" data-text="LIVEを聴く方法">LIVEを聴く方法</h2>
-                <ol class="space-y-10 mb-14 text-xl md:text-2xl font-bold leading-loose">
-                   <li class="flex items-start gap-6">
-                      <div class="step-badge">1</div>
-                      <span class="pt-1">音楽配信アプリ【AWA】をダウンロード</span>
-                   </li>
-                   <li class="flex items-start gap-6">
-                      <div class="step-badge">2</div>
-                      <div class="pt-1 w-full">
-                         <p class="mb-8">AWA公認配信者【〽️ヤマ】をフォロー</p>
-                         <div class="flex items-center gap-6 bg-white/10 p-5 rounded-2xl border border-[#00ffff]/30 backdrop-blur-md">
-                            <img src="/ヤマアイコン.webp" alt="〽️ヤマ" class="w-20 h-20 rounded-full border-2 border-[#00ffff] object-cover shadow-[0_0_15px_#00ffff]" />
-                            <span class="text-3xl font-black text-white tracking-widest">〽️ヤマ</span>
-                         </div>
-                      </div>
-                   </li>
-                </ol>
-                <!-- CTA Button -->
-                <a href="https://s.awa.fm/user/tcibd6vcaba5hnzy5xryyyy7ry?t=1776856537" target="_blank" rel="noopener noreferrer" class="group relative flex items-center justify-center w-full h-20 bg-pop-pink text-black font-display text-2xl font-black border-4 border-black pop-shadow-black hover:translate-x-2 hover:translate-y-2 transition-all overflow-hidden rounded-xl">
-                   <span class="relative z-10 group-hover:hidden tracking-widest">〽️ヤマをフォローしてライブを聴く</span>
-                   <span class="hidden group-hover:block relative z-20 gagaga-text text-black animate-shake text-3xl md:text-4xl" data-text="AWAで聴く！">AWAで聴く！</span>
-                </a>
-             </div>
-          </div>
+        <!-- HOW_TO_LISTEN Section (Drastic Improvement) -->
+        <div id="how-to-listen" class="mt-20 md:mt-32 py-10 flex flex-col items-center w-full relative z-30">
+           <div class="reveal-init w-[95%] max-w-4xl shadow-2xl neon-border-cyan p-8 md:p-16 flex flex-col items-center text-center rounded-[2rem]">
+              
+              <!-- Yama Branding (Centered Header) -->
+              <div class="flex flex-col items-center gap-6 mb-12">
+                 <div class="relative group">
+                   <img src="/ヤマアイコン.webp" alt="〽️ヤマ" class="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-[#00ffff] object-cover shadow-[0_0_20px_rgba(0,255,255,0.5)] transition-transform duration-300 group-hover:scale-110" />
+                   <div class="absolute -inset-2 border-2 border-[#00ffff] rounded-full animate-ping opacity-20 pointer-events-none"></div>
+                 </div>
+                 <h3 class="text-3xl md:text-5xl font-black text-[#00ffff] gagaga-text tracking-widest" data-text="〽️ヤマ">〽️ヤマ</h3>
+              </div>
+
+              <h2 class="font-display text-4xl md:text-6xl font-black mb-12 gagaga-text text-pop-blue" data-text="LIVEを聴く方法">LIVEを聴く方法</h2>
+              
+              <ol class="w-full space-y-8 mb-16 text-xl md:text-2xl font-bold leading-loose flex flex-col items-center">
+                 <li class="flex flex-col md:flex-row items-center gap-6 my-4 w-full justify-center">
+                    <div class="step-badge">1</div>
+                    <span class="md:pt-1">音楽配信アプリ【AWA】をダウンロード</span>
+                 </li>
+                 <li class="flex flex-col md:flex-row items-center gap-6 my-4 w-full justify-center">
+                    <div class="step-badge">2</div>
+                    <span class="md:pt-1">AWA公認配信者【〽️ヤマ】をフォロー</span>
+                 </li>
+              </ol>
+
+              <!-- CTA Button (High Contrast) -->
+              <a href="https://s.awa.fm/user/tcibd6vcaba5hnzy5xryyyy7ry?t=1776856537" target="_blank" rel="noopener noreferrer" class="group relative flex items-center justify-center w-full max-w-2xl h-24 bg-pop-pink text-black font-display text-xl md:text-3xl font-black border-4 border-black pop-shadow-black hover:translate-x-2 hover:translate-y-2 transition-all overflow-hidden rounded-2xl">
+                 <span class="relative z-10 group-hover:hidden tracking-wider">〽️ヤマをフォローしてライブを聴く</span>
+                 <span class="hidden group-hover:block relative z-20 text-black animate-shake text-4xl md:text-5xl" style="font-family: inherit;">AWAで聴く！</span>
+              </a>
+           </div>
         </div>
       </div>
     </section>
