@@ -207,68 +207,26 @@ function renderMembers() {
   const grid = document.getElementById('members-grid');
   if (!grid) return;
 
-  const isMobile = window.innerWidth < 768 || window.matchMedia("(max-width: 767px)").matches;
+  // DIRECT DATA DEFINITION (as requested)
+  const members = [
+    {name: 'モノクロ', icon: '/monokuro-icon.webp', link: 'https://lit.link/monokuro8neat', color: '#ff66b2'},
+    {name: '迷走だだだ', icon: '/dadada-icon.webp', link: 'https://x.com/DadadaMeisou?s=20', color: '#ff9933'},
+    {name: 'AsaMo', icon: '/asamo-icon.webp', link: 'https://lit.link/asamo', color: '#a0d8ef'},
+    {name: '米粒元気', icon: '/kometsubu-icon.webp', link: 'https://www.instagram.com/kometsubugenki/', color: '#ffffff'},
+    {name: '川上牧場', icon: '/kawakami-icon.jpg', link: 'https://lit.link/kawakamifarm', color: '#333333'}
+  ];
 
-  grid.innerHTML = membersData.map(member => {
-    if (member.type === 'placeholder') {
-      const textColor = member.textWhite ? 'text-white' : '';
-      const textClass = member.isText ? 'font-display text-lg md:text-2xl font-black' : 'text-4xl md:text-6xl font-black';
-      return `
-        <div class="reveal-init member-panel-container group relative aspect-square pop-border oto-panel pop-shadow-black flex items-center justify-center" style="background-color: ${member.bgColor}">
-          <span class="${textClass} opacity-30 group-hover-shake ${textColor}">${member.content}</span>
+  // PHYSICAL HTML RECONSTRUCTION (Strictly following provided snippet)
+  grid.innerHTML = members.map(m => `
+    <div style="width: 90vw; max-width: 450px; margin-bottom: 4rem; position: relative; opacity: 1 !important; visibility: visible !important;">
+      <a href="${m.link}" target="_blank" style="display: block; width: 100%; height: 100%; text-decoration: none;">
+        <img src="${m.icon}" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border: 4px solid ${m.color}; border-radius: 12px; display: block; opacity: 1 !important; visibility: visible !important;">
+        <div style="position: absolute; bottom: -1rem; left: 50%; transform: translateX(-50%); background: black; border: 2px solid ${m.color}; color: white; padding: 0.5rem 2rem; white-space: nowrap; font-weight: 900; font-size: 1.5rem; z-index: 50; display: block !important; opacity: 1 !important;">
+          ${m.name}
         </div>
-      `;
-    }
-
-    // Standard Member Rendering
-    const textColor = member.bgColor === 'black' ? 'text-white' : 'text-black';
-    const strokeClass = member.bgColor === '#ff66b2' ? 'text-white text-stroke-black' : '';
-    const shadowClass = member.bgColor === 'black' ? 'pop-shadow-pink' : 'pop-shadow-black';
-    
-    // Customizations
-    const iGlitch = member.iconGlitchClass || 'icon-glitch';
-    const mAnim = member.mascotAnimClass || 'animate-bounce';
-    
-    const nameTextSize = member.name.length > 4 ? 'text-2xl' : 'text-3xl';
-    
-    // PHYSICAL RECONSTRUCTION:
-    // 1. Force the name label to be always visible and high contrast.
-    // 2. Force the Icon image to be always opaque (opacity-100).
-    // 3. Use inline style for absolute physical dimensions on mobile cards.
-    
-    let nameHtml = `<span class="desktop-name font-display ${nameTextSize} font-black ${textColor} ${strokeClass} gagaga-text z-20 pointer-events-none" style="transform: rotate(${member.rotation});" data-text="${member.name}">${member.name}</span>`;
-    
-    // Always visible name label for mobile/desktop clarity
-    let mobileNameLabel = `<div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-40 bg-black border-2 border-[#ff66b2] px-6 py-2 rounded-lg text-white font-black text-xl tracking-widest gagaga-text whitespace-nowrap shadow-[0_0_15px_rgba(255,102,178,0.5)]" data-text="${member.name}">${member.name}</div>`;
-
-    if (member.icon && member.link) {
-      contentHtml = `
-        <a href="${member.link}" target="_blank" rel="noopener noreferrer" class="absolute inset-0 z-30 flex items-center justify-center p-4 opacity-100">
-          <img src="${member.icon}" alt="${member.name}" class="w-full h-full object-contain drop-shadow-xl opacity-100" />
-        </a>
-        <div class="absolute inset-0 z-20 flex items-center justify-center pointer-events-none opacity-0 md:opacity-100">
-          ${nameHtml}
-        </div>
-        ${mobileNameLabel}
-      `;
-    }
-
-    // Physical style for card size and spacing
-    const physicalStyle = `width: 90vw; height: 90vw; max-width: 450px; margin-bottom: 3rem; background-color: ${member.bgColor};`;
-
-    return `
-      <div class="reveal-init member-panel-container group relative cursor-pointer flex items-center justify-center pop-border oto-panel ${shadowClass}" style="${physicalStyle}">
-        ${contentHtml}
-        <!-- Mascot -->
-        <div class="absolute bottom-2 right-2 w-16 h-16 flex items-end justify-end z-10 pointer-events-none">
-           <img src="/mascot.webp" class="w-12 h-12 md:w-full md:h-full object-contain ${mAnim} opacity-50 mix-blend-screen" alt="mascot" />
-        </div>
-      </div>
-    `;
-  }).join('');
-
-  initMemberScrollAnimations();
-  initMemberTapHandler();
+      </a>
+    </div>
+  `).join('');
 }
 
 function initMemberScrollAnimations() {
