@@ -295,8 +295,73 @@
   box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
 }
 
-@media (min-width: 768px) {
-  /* Removed speech bubble arrow in centered layout */
+/* MEMBERS Section - Physical Force Grid & Visibility */
+.members-grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .members-grid-container {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* Default (PC/Tablet) Visibility */
+.mobile-name-label {
+  display: none;
+}
+.member-link {
+  opacity: 0;
+  pointer-events: none;
+}
+.member-panel-container:hover .member-link {
+  opacity: 1;
+  pointer-events: auto;
+}
+.member-panel-container:hover .desktop-name-container {
+  opacity: 0;
+}
+
+/* MOBILE PHYSICAL FORCE (<768px) */
+@media (max-width: 767px) {
+  .members-grid-container {
+    grid-template-columns: 1fr !important;
+    gap: 4rem !important; /* Large gap to prevent overlap */
+  }
+
+  .member-panel-container {
+    width: 90vw !important;
+    max-width: 400px !important;
+    margin: 0 auto !important;
+  }
+
+  /* Force Icons Visible */
+  .member-link {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    z-index: 30;
+  }
+
+  /* Force Name Overlay Visible */
+  .mobile-name-label {
+    display: block !important;
+    opacity: 1 !important;
+    z-index: 40;
+  }
+
+  /* Hide original center name on mobile to avoid overlap */
+  .desktop-name-container {
+    display: none !important;
+  }
+  
+  .mascot-container {
+    width: 4rem;
+    height: 4rem;
+    bottom: 0.5rem;
+    right: 0.5rem;
+  }
 }
 
 /* Copy URL Button Feedback */

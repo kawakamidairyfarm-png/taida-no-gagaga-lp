@@ -229,12 +229,12 @@ function renderMembers() {
     const iGlitch = member.iconGlitchClass || 'icon-glitch';
     const mAnim = member.mascotAnimClass || 'animate-bounce';
     
-    const nameTextSize = isMobile ? 'text-xl md:text-2xl' : (member.name.length > 4 ? 'text-2xl' : 'text-3xl');
+    const nameTextSize = member.name.length > 4 ? 'text-2xl' : 'text-3xl';
     
-    // PC: Name visible, Icon hidden (hover needed)
-    // Mobile: Icon visible, Name visible in overlay
-    let nameHtml = `<span class="font-display ${nameTextSize} font-black ${textColor} ${strokeClass} group-hover-shake gagaga-text z-20 pointer-events-none transition-opacity duration-300 ${isMobile ? 'opacity-0 hidden' : 'group-hover:opacity-0'}" style="transform: rotate(${member.rotation});" data-text="${member.name}">${member.name}</span>`;
-    let mobileNameLabel = isMobile ? `<div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-40 bg-black/80 border-2 border-[#ff66b2] px-6 py-2 rounded-lg text-white font-black text-xl tracking-widest gagaga-text whitespace-nowrap shadow-[0_0_15px_rgba(255,102,178,0.5)]" data-text="${member.name}">${member.name}</div>` : '';
+    // Output both Name (PC) and Mobile Label
+    // Visibility will be handled by CSS media queries
+    let nameHtml = `<span class="desktop-name font-display ${nameTextSize} font-black ${textColor} ${strokeClass} group-hover-shake gagaga-text z-20 pointer-events-none transition-opacity duration-300 group-hover:opacity-0" style="transform: rotate(${member.rotation});" data-text="${member.name}">${member.name}</span>`;
+    let mobileNameLabel = `<div class="mobile-name-label absolute bottom-6 left-1/2 -translate-x-1/2 z-40 bg-black/80 border-2 border-[#ff66b2] px-6 py-2 rounded-lg text-white font-black text-xl tracking-widest gagaga-text whitespace-nowrap shadow-[0_0_15px_rgba(255,102,178,0.5)]" data-text="${member.name}">${member.name}</div>`;
 
     let contentHtml = `
       <div class="absolute inset-0 z-20 flex items-center justify-center pointer-events-none transition-opacity duration-300">
@@ -243,25 +243,22 @@ function renderMembers() {
     `;
 
     if (member.icon && member.link) {
-      const iconOpacity = isMobile ? 'opacity-100' : 'opacity-0 group-hover:opacity-100';
       contentHtml = `
-        <a href="${member.link}" target="_blank" rel="noopener noreferrer" class="member-link absolute inset-0 z-30 flex items-center justify-center p-4 md:p-2 ${iconOpacity} transition-opacity duration-300">
+        <a href="${member.link}" target="_blank" rel="noopener noreferrer" class="member-link absolute inset-0 z-30 flex items-center justify-center p-4 md:p-2 transition-opacity duration-300">
           <img src="${member.icon}" alt="${member.name}" class="w-full h-full object-contain ${iGlitch} drop-shadow-xl hover:scale-110 transition-transform" />
         </a>
-        <div class="absolute inset-0 z-20 flex items-center justify-center pointer-events-none ${isMobile ? 'opacity-0' : 'group-hover:opacity-0'} transition-opacity duration-300">
+        <div class="desktop-name-container absolute inset-0 z-20 flex items-center justify-center pointer-events-none transition-opacity duration-300 group-hover:opacity-0">
           ${nameHtml}
         </div>
         ${mobileNameLabel}
       `;
     }
 
-    const mobilePanelWidth = isMobile ? 'w-[90vw] max-w-sm' : 'w-full';
-
     return `
-      <div class="reveal-init member-panel-container ${mobilePanelWidth} group relative aspect-square cursor-pointer flex items-center justify-center pop-border oto-panel ${shadowClass} transition-colors duration-300 ${member.hoverColorClass || ''}" style="background-color: ${member.bgColor}">
+      <div class="reveal-init member-panel-container group relative aspect-square cursor-pointer flex items-center justify-center pop-border oto-panel ${shadowClass} transition-colors duration-300 ${member.hoverColorClass || ''}" style="background-color: ${member.bgColor}">
         ${contentHtml}
-        <!-- Mascot - Persistent on Mobile bottom -->
-        <div class="absolute bottom-2 right-2 w-16 h-16 md:inset-x-0 md:bottom-0 md:h-1/2 flex items-end justify-end md:justify-center translate-y-0 md:translate-y-full md:group-hover:translate-y-4 transition-transform duration-200 z-10 pointer-events-none">
+        <!-- Mascot -->
+        <div class="mascot-container absolute bottom-2 right-2 flex items-end justify-end transition-transform duration-200 z-10 pointer-events-none">
            <img src="/mascot.webp" class="w-12 h-12 md:w-full md:h-full object-contain ${mAnim} opacity-40 md:opacity-80 mix-blend-screen" alt="ひょっこり" />
         </div>
       </div>
