@@ -18,8 +18,8 @@
       <div class="absolute inset-0 opacity-[0.03] z-0" style="background-image: radial-gradient(black 2px, transparent 2px); background-size: 20px 20px; background-position: 0 0;"></div>
 
       <!-- Copy text -->
-      <div id="hero-copy" class="absolute top-[18%] w-full text-center z-30">
-         <p class="font-display text-2xl md:text-5xl font-black tracking-widest text-[#111] bg-white border-4 border-black inline-block px-6 py-3 pop-shadow-pink gagaga-text hover:animate-shake cursor-pointer" data-text="ただ聴くだけの退屈な時間は、ここで終わる。">
+      <div id="hero-copy" class="absolute top-[18%] w-full text-center z-30 px-4">
+         <p class="font-display text-lg md:text-5xl font-black tracking-widest text-[#111] bg-white border-4 border-black inline-block px-4 md:px-6 py-2 md:py-3 pop-shadow-pink gagaga-text hover:animate-shake cursor-pointer backdrop-blur-sm" data-text="ただ聴くだけの退屈な時間は、ここで終わる。">
            ただ聴くだけの退屈な時間は、ここで終わる。
          </p>
       </div>
@@ -31,7 +31,7 @@
       </div>
 
       <!-- Mascot Image -->
-      <div id="hero-mascot" class="absolute bottom-10 right-10 md:bottom-20 md:right-32 z-20 w-48 md:w-64 xl:w-96 transition-all duration-1000 ease-out origin-bottom transform mascot-float hover:scale-110 cursor-pointer drop-shadow-xl">
+      <div id="hero-mascot" class="absolute bottom-10 right-4 md:bottom-20 md:right-32 z-20 w-32 md:w-64 xl:w-96 transition-all duration-1000 ease-out origin-bottom transform mascot-float hover:scale-110 cursor-pointer drop-shadow-xl">
         <img src="/mascot.webp" alt="ミニキャラ" class="w-full h-auto" id="hero-mascot-img" />
       </div>
 
@@ -42,8 +42,8 @@
       </div>
 
       <!-- Playful Decals -->
-      <div class="mask-ga decal-pop w-24 h-24 top-1/4 left-10 rotate-12 text-pop-blue opacity-80" style="background-color: currentColor;"></div>
-      <div class="mask-ga decal-pop w-32 h-32 bottom-20 left-[20%] -rotate-6 text-pop-orange opacity-70" style="background-color: currentColor;"></div>
+      <div class="mask-ga decal-pop w-16 md:w-24 h-16 md:h-24 top-1/4 left-4 md:left-10 rotate-12 text-pop-blue opacity-80" style="background-color: currentColor;"></div>
+      <div class="mask-ga decal-pop w-20 md:w-32 h-20 md:h-32 bottom-20 left-[10%] md:left-[20%] -rotate-6 text-pop-orange opacity-70" style="background-color: currentColor;"></div>
     </section>
 
     <!-- Ga Lining 1 -->
@@ -55,18 +55,18 @@
     <section id="members" class="relative w-full py-32 z-20 border-b-[8px] border-black bg-[#f4f6f8]">
 
       <div class="container mx-auto px-4 max-w-7xl relative z-10">
-        <div class="text-center mb-16">
-          <h2 class="font-display text-5xl md:text-7xl font-black text-white bg-black pop-shadow-blue inline-block px-8 py-2 transform -rotate-2 hover:rotate-2 transition-transform cursor-pointer gagaga-text border-4 border-black" data-text="MEMBERS">
+        <div class="text-center mb-10 md:mb-16">
+          <h2 class="font-display text-4xl md:text-7xl font-black text-white bg-black pop-shadow-blue inline-block px-6 md:px-8 py-2 transform -rotate-2 hover:rotate-2 transition-transform cursor-pointer gagaga-text border-4 border-black" data-text="MEMBERS">
             MEMBERS
           </h2>
         </div>
         
         <!-- Playful decals in members section -->
-        <div class="mask-ga decal-pop w-40 h-40 -top-10 -right-10 rotate-45 text-pop-pink opacity-20" style="background-color: currentColor;"></div>
-        <div class="mask-ga decal-pop w-20 h-20 bottom-0 left-1/4 -rotate-12 text-pop-green opacity-40" style="background-color: currentColor;"></div>
+        <div class="mask-ga decal-pop hidden md:block w-40 h-40 -top-10 -right-10 rotate-45 text-pop-pink opacity-20" style="background-color: currentColor;"></div>
+        <div class="mask-ga decal-pop hidden md:block w-20 h-20 bottom-0 left-1/4 -rotate-12 text-pop-green opacity-40" style="background-color: currentColor;"></div>
 
         <!-- Rendered dynamically via main.js -->
-        <div id="members-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6 relative z-20">
+        <div id="members-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 md:gap-6 relative z-20">
         </div>
       </div>
     </section>
@@ -121,12 +121,12 @@
         </div>
 
         <!-- Pop CTA Button -->
-        <a href="#" id="cta-button" class="group relative flex items-center justify-center w-full max-w-[450px] h-[120px] bg-black text-white font-display text-4xl font-black border-4 border-black pop-shadow-pink transition-all duration-75 hover:translate-x-1 hover:translate-y-1 hover:box-shadow-none hover:bg-pop-pink overflow-hidden">
+        <a href="#" id="cta-button" class="group relative flex items-center justify-center w-full md:max-w-[450px] h-20 md:h-[120px] bg-black text-white font-display text-2xl md:text-4xl font-black border-4 border-black pop-shadow-pink transition-all duration-75 hover:translate-x-1 hover:translate-y-1 hover:box-shadow-none hover:bg-pop-pink overflow-hidden rounded-lg">
           
           <span class="relative z-10 group-hover:hidden tracking-wider">怠惰組に参加する</span>
           
           <!-- Intense Glitch Text on Hover -->
-          <span class="hidden group-hover:block relative z-20 font-black text-5xl gagaga-text text-pop-orange animate-shake" data-text="ガガガガガガ！">
+          <span class="hidden group-hover:block relative z-20 font-black text-3xl md:text-5xl gagaga-text text-pop-orange animate-shake" data-text="ガガガガガガ！">
             ガガガガガガ！
           </span>
           

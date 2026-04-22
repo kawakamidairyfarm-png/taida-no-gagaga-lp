@@ -30,6 +30,12 @@
     }
   }
 
+  @media (max-width: 767px) {
+    body {
+      border-width: 12px;
+    }
+  }
+
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
     letter-spacing: 0.1em;
@@ -139,6 +145,24 @@
   60% { clip-path: inset(60% 0 20% 0); transform: translate(-3px, 3px); }
   80% { clip-path: inset(20% 0 60% 0); transform: translate(3px, -3px); }
   100% { clip-path: inset(50% 0 30% 0); transform: translate(-3px, 3px); }
+}
+
+@media (max-width: 767px) {
+  @keyframes glitch-color-1 {
+    0%, 100% { transform: translate(0); clip-path: inset(20% 0 50% 0); }
+    50% { transform: translate(-1px, 1px); clip-path: inset(50% 0 20% 0); }
+  }
+  @keyframes glitch-color-2 {
+    0%, 100% { transform: translate(0); clip-path: inset(10% 0 80% 0); }
+    50% { transform: translate(1px, -1px); clip-path: inset(80% 0 10% 0); }
+  }
+  .pop-shadow-black, .pop-shadow-pink, .pop-shadow-blue {
+    box-shadow: 4px 4px 0px #111;
+  }
+  .oto-panel:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 5px 5px 0px #111;
+  }
 }
 
 /* Mascot Animations */

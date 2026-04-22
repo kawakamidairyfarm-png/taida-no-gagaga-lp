@@ -115,14 +115,15 @@ function generateGaBackground() {
   const container = document.getElementById('ga-bg-container');
   if (!container) return;
 
-  const numLogos = 45; // Increased slightly for more playfulness
+  const isMobile = window.innerWidth < 768;
+  const numLogos = isMobile ? 20 : 45; // 50% fewer logos on mobile
   const windowHeight = document.documentElement.scrollHeight;
   const windowWidth = document.documentElement.scrollWidth;
 
   for (let i = 0; i < numLogos; i++) {
     const el = document.createElement('div');
     const color = popColors[Math.floor(Math.random() * popColors.length)];
-    const size = Math.floor(Math.random() * 350) + 100; // slightly smaller but more of them
+    const size = Math.floor(Math.random() * (isMobile ? 200 : 350)) + 100;
     const top = Math.random() * windowHeight;
     const left = Math.random() * windowWidth;
     const rot = Math.random() * 360;
@@ -130,10 +131,13 @@ function generateGaBackground() {
     const animRotDuration = (Math.random() * 25) + 15;
     const rotDir = Math.random() > 0.5 ? 1 : -1;
 
-    el.className = 'absolute mask-ga pointer-events-none mix-blend-multiply opacity-30';
+    const baseOpacity = isMobile ? 0.15 : 0.3; // Lower opacity on mobile
+    el.className = 'absolute mask-ga pointer-events-none mix-blend-multiply';
+    el.style.opacity = baseOpacity;
+
     if (color === '#111111') {
        el.classList.remove('mix-blend-multiply');
-       el.style.opacity = '0.05';
+       el.style.opacity = isMobile ? '0.02' : '0.05';
     }
 
     Object.assign(el.style, {
@@ -157,8 +161,8 @@ function generateGaBackground() {
 
     // Dynamic floating effect
     gsap.to(el, {
-      x: `+=${(Math.random() - 0.5) * 200}`,
-      y: `+=${(Math.random() - 0.5) * 200}`,
+      x: `+=${(Math.random() - 0.5) * (isMobile ? 100 : 200)}`,
+      y: `+=${(Math.random() - 0.5) * (isMobile ? 100 : 200)}`,
       duration: (Math.random() * 5) + 5,
       repeat: -1,
       yoyo: true,
@@ -187,7 +191,7 @@ function renderMembers() {
   grid.innerHTML = membersData.map(member => {
     if (member.type === 'placeholder') {
       const textColor = member.textWhite ? 'text-white' : '';
-      const textClass = member.isText ? 'font-display text-2xl font-black' : 'text-6xl font-black';
+      const textClass = member.isText ? 'font-display text-lg md:text-2xl font-black' : 'text-4xl md:text-6xl font-black';
       return `
         <div class="group relative w-full aspect-square pop-border oto-panel pop-shadow-black flex items-center justify-center" style="background-color: ${member.bgColor}">
           <span class="${textClass} opacity-30 group-hover-shake ${textColor}">${member.content}</span>
@@ -205,11 +209,12 @@ function renderMembers() {
     const mAnim = member.mascotAnimClass || 'animate-bounce';
     
     // Icon rendering if present
-    let contentHtml = `<span class="font-display ${member.name.length > 4 ? 'text-2xl' : 'text-3xl'} font-black ${textColor} ${strokeClass} group-hover-shake gagaga-text z-20 pointer-events-none transition-opacity duration-300 group-hover:opacity-0" style="transform: rotate(${member.rotation});" data-text="${member.name}">${member.name}</span>`;
+    const nameTextSize = window.innerWidth < 768 ? 'text-xl' : (member.name.length > 4 ? 'text-2xl' : 'text-3xl');
+    let contentHtml = `<span class="font-display ${nameTextSize} font-black ${textColor} ${strokeClass} group-hover-shake gagaga-text z-20 pointer-events-none transition-opacity duration-300 group-hover:opacity-0" style="transform: rotate(${member.rotation});" data-text="${member.name}">${member.name}</span>`;
     
     if (member.icon && member.link) {
       contentHtml = `
-        <a href="${member.link}" target="_blank" rel="noopener noreferrer" class="absolute inset-0 z-30 flex items-center justify-center p-2 group-hover:opacity-100 opacity-0 transition-opacity duration-300">
+        <a href="${member.link}" target="_blank" rel="noopener noreferrer" class="absolute inset-0 z-30 flex items-center justify-center p-4 md:p-2 group-hover:opacity-100 opacity-0 transition-opacity duration-300">
           <img src="${member.icon}" alt="${member.name}" class="w-full h-full object-contain ${iGlitch} drop-shadow-xl hover:scale-110 transition-transform" />
         </a>
         <div class="absolute inset-0 z-20 flex items-center justify-center pointer-events-none group-hover:opacity-0 transition-opacity duration-300">
@@ -235,6 +240,8 @@ function initHeroAnimations() {
   const mascotImg = document.getElementById('hero-mascot-img');
   const copy = document.getElementById('hero-copy');
   
+  const isMobile = window.innerWidth < 768;
+
   // Set initial states
   gsap.set(copy, { opacity: 0, y: 20 });
   // Mascot initially sleeping
@@ -256,8 +263,8 @@ function initHeroAnimations() {
     gsap.to(mascotImg, {
       duration: 1,
       rotation: -10, // slightly tilted action pose
-      y: -150,
-      x: -50,
+      y: isMobile ? -80 : -150, // Reduced float on mobile
+      x: isMobile ? -20 : -50,
       ease: 'back.out(1.5)'
     });
 
@@ -277,7 +284,7 @@ function initHeroAnimations() {
           logo.classList.add('is-glitching');
           setTimeout(() => logo.classList.remove('is-glitching'), 300);
         }
-      }, 2000);
+      }, isMobile ? 3000 : 2000); // Less frequent glitches on mobile
     }
   }
 
