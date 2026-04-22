@@ -231,35 +231,37 @@ function renderMembers() {
     
     const nameTextSize = member.name.length > 4 ? 'text-2xl' : 'text-3xl';
     
-    // Output both Name (PC) and Mobile Label
-    // Visibility will be handled by CSS media queries
-    let nameHtml = `<span class="desktop-name font-display ${nameTextSize} font-black ${textColor} ${strokeClass} group-hover-shake gagaga-text z-20 pointer-events-none transition-opacity duration-300 group-hover:opacity-0" style="transform: rotate(${member.rotation});" data-text="${member.name}">${member.name}</span>`;
-    let mobileNameLabel = `<div class="mobile-name-label absolute bottom-6 left-1/2 -translate-x-1/2 z-40 bg-black/80 border-2 border-[#ff66b2] px-6 py-2 rounded-lg text-white font-black text-xl tracking-widest gagaga-text whitespace-nowrap shadow-[0_0_15px_rgba(255,102,178,0.5)]" data-text="${member.name}">${member.name}</div>`;
-
-    let contentHtml = `
-      <div class="absolute inset-0 z-20 flex items-center justify-center pointer-events-none transition-opacity duration-300">
-        ${nameHtml}
-      </div>
-    `;
+    // PHYSICAL RECONSTRUCTION:
+    // 1. Force the name label to be always visible and high contrast.
+    // 2. Force the Icon image to be always opaque (opacity-100).
+    // 3. Use inline style for absolute physical dimensions on mobile cards.
+    
+    let nameHtml = `<span class="desktop-name font-display ${nameTextSize} font-black ${textColor} ${strokeClass} gagaga-text z-20 pointer-events-none" style="transform: rotate(${member.rotation});" data-text="${member.name}">${member.name}</span>`;
+    
+    // Always visible name label for mobile/desktop clarity
+    let mobileNameLabel = `<div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-40 bg-black border-2 border-[#ff66b2] px-6 py-2 rounded-lg text-white font-black text-xl tracking-widest gagaga-text whitespace-nowrap shadow-[0_0_15px_rgba(255,102,178,0.5)]" data-text="${member.name}">${member.name}</div>`;
 
     if (member.icon && member.link) {
       contentHtml = `
-        <a href="${member.link}" target="_blank" rel="noopener noreferrer" class="member-link absolute inset-0 z-30 flex items-center justify-center p-4 md:p-2 transition-opacity duration-300">
-          <img src="${member.icon}" alt="${member.name}" class="w-full h-full object-contain ${iGlitch} drop-shadow-xl hover:scale-110 transition-transform" />
+        <a href="${member.link}" target="_blank" rel="noopener noreferrer" class="absolute inset-0 z-30 flex items-center justify-center p-4 opacity-100">
+          <img src="${member.icon}" alt="${member.name}" class="w-full h-full object-contain drop-shadow-xl opacity-100" />
         </a>
-        <div class="desktop-name-container absolute inset-0 z-20 flex items-center justify-center pointer-events-none transition-opacity duration-300 group-hover:opacity-0">
+        <div class="absolute inset-0 z-20 flex items-center justify-center pointer-events-none opacity-0 md:opacity-100">
           ${nameHtml}
         </div>
         ${mobileNameLabel}
       `;
     }
 
+    // Physical style for card size and spacing
+    const physicalStyle = `width: 90vw; height: 90vw; max-width: 450px; margin-bottom: 3rem; background-color: ${member.bgColor};`;
+
     return `
-      <div class="reveal-init member-panel-container group relative aspect-square cursor-pointer flex items-center justify-center pop-border oto-panel ${shadowClass} transition-colors duration-300 ${member.hoverColorClass || ''}" style="background-color: ${member.bgColor}">
+      <div class="reveal-init member-panel-container group relative cursor-pointer flex items-center justify-center pop-border oto-panel ${shadowClass}" style="${physicalStyle}">
         ${contentHtml}
         <!-- Mascot -->
-        <div class="mascot-container absolute bottom-2 right-2 flex items-end justify-end transition-transform duration-200 z-10 pointer-events-none">
-           <img src="/mascot.webp" class="w-12 h-12 md:w-full md:h-full object-contain ${mAnim} opacity-40 md:opacity-80 mix-blend-screen" alt="ひょっこり" />
+        <div class="absolute bottom-2 right-2 w-16 h-16 flex items-end justify-end z-10 pointer-events-none">
+           <img src="/mascot.webp" class="w-12 h-12 md:w-full md:h-full object-contain ${mAnim} opacity-50 mix-blend-screen" alt="mascot" />
         </div>
       </div>
     `;

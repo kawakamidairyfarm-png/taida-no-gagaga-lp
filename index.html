@@ -5,62 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>怠惰のガガガ - POP ART EDITION</title>
     <link href="./style.css" rel="stylesheet">
-    <style>
-      /* 物理的破壊コード: モバイル表示の強制適用 (!important付与) */
-      @media screen and (max-width: 900px) {
-        .members-grid-container {
-          display: flex !important;
-          flex-direction: column !important;
-          align-items: center !important;
-          gap: 4rem !important;
-        }
-        
-        .member-panel-container {
-          width: 90vw !important;
-          height: 90vw !important;
-          max-width: 450px !important;
-          margin-bottom: 3rem !important;
-          position: relative !important;
-        }
-
-        /* 写真と名前の強制同時表示 */
-        .member-link {
-          opacity: 1 !important;
-          visibility: visible !important;
-          display: flex !important;
-          position: absolute !important;
-          inset: 0 !important;
-          pointer-events: auto !important;
-          z-index: 50 !important;
-        }
-        
-        .member-link img {
-          opacity: 1 !important;
-          visibility: visible !important;
-          display: block !important;
-        }
-
-        .mobile-name-label {
-          display: block !important;
-          opacity: 1 !important;
-          visibility: visible !important;
-          z-index: 60 !important;
-          pointer-events: none !important;
-        }
-
-        /* 重なり問題解消：デスクトップ用中心ネームを消去 */
-        .desktop-name-container {
-          display: none !important;
-        }
-        
-        .mascot-container {
-          width: 4rem !important;
-          height: 4rem !important;
-          bottom: 0.5rem !important;
-          right: 0.5rem !important;
-        }
-      }
-    </style>
   </head>
   <body class="antialiased selection:bg-pop-pink selection:text-white bg-[#f8f9fa] text-[#111111]">
 
@@ -121,8 +65,8 @@
         <div class="mask-ga decal-pop hidden md:block w-40 h-40 -top-10 -right-10 rotate-45 text-pop-pink opacity-20" style="background-color: currentColor;"></div>
         <div class="mask-ga decal-pop hidden md:block w-20 h-20 bottom-0 left-1/4 -rotate-12 text-pop-green opacity-40" style="background-color: currentColor;"></div>
 
-        <!-- MEMBERS Section Grid -->
-        <div id="members-grid" class="members-grid-container relative z-20 w-full max-w-none md:max-w-none mx-auto">
+        <!-- MEMBERS Section Grid (Physical Flex Force) -->
+        <div id="members-grid" class="flex flex-col items-center w-full gap-12 md:grid md:grid-cols-4 lg:grid-cols-5 relative z-20">
         </div>
 
         <!-- HOW_TO_LISTEN Section (Final Adjustments) -->
