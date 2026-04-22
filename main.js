@@ -63,12 +63,7 @@ const membersData = [
     iconGlitchClass: "icon-glitch-black", // Extreme monochrome noise
     mascotAnimClass: "animate-dynamic-float", // Dynamic celebratory float
     type: "member"
-  },
-  { type: "placeholder", bgColor: "#ffcc00", content: "!" },
-  { type: "placeholder", bgColor: "var(--color-pop-pink)", content: "?", textWhite: true },
-  { type: "placeholder", bgColor: "var(--color-pop-blue)", content: "♬" },
-  { type: "placeholder", bgColor: "#00e676", content: "ガガガ", isText: true },
-  { type: "placeholder", bgColor: "white", content: "★" }
+  }
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
