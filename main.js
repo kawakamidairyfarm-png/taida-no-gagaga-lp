@@ -131,7 +131,8 @@ function generateGaBackground() {
     const animRotDuration = (Math.random() * 25) + 15;
     const rotDir = Math.random() > 0.5 ? 1 : -1;
 
-    const baseOpacity = isMobile ? 0.15 : 0.3; // Lower opacity on mobile
+    // Mobile: super faint background logos (0.1) for better readability
+    const baseOpacity = isMobile ? 0.1 : 0.3; 
     el.className = 'absolute mask-ga pointer-events-none mix-blend-multiply';
     el.style.opacity = baseOpacity;
 
@@ -193,7 +194,7 @@ function renderMembers() {
       const textColor = member.textWhite ? 'text-white' : '';
       const textClass = member.isText ? 'font-display text-lg md:text-2xl font-black' : 'text-4xl md:text-6xl font-black';
       return `
-        <div class="group relative w-full aspect-square pop-border oto-panel pop-shadow-black flex items-center justify-center" style="background-color: ${member.bgColor}">
+        <div class="reveal-init member-panel-container group relative w-full aspect-square pop-border oto-panel pop-shadow-black flex items-center justify-center" style="background-color: ${member.bgColor}">
           <span class="${textClass} opacity-30 group-hover-shake ${textColor}">${member.content}</span>
         </div>
       `;
@@ -209,12 +210,13 @@ function renderMembers() {
     const mAnim = member.mascotAnimClass || 'animate-bounce';
     
     // Icon rendering if present
-    const nameTextSize = window.innerWidth < 768 ? 'text-xl' : (member.name.length > 4 ? 'text-2xl' : 'text-3xl');
+    const isMobile = window.innerWidth < 768;
+    const nameTextSize = isMobile ? 'text-xl' : (member.name.length > 4 ? 'text-2xl' : 'text-3xl');
     let contentHtml = `<span class="font-display ${nameTextSize} font-black ${textColor} ${strokeClass} group-hover-shake gagaga-text z-20 pointer-events-none transition-opacity duration-300 group-hover:opacity-0" style="transform: rotate(${member.rotation});" data-text="${member.name}">${member.name}</span>`;
     
     if (member.icon && member.link) {
       contentHtml = `
-        <a href="${member.link}" target="_blank" rel="noopener noreferrer" class="absolute inset-0 z-30 flex items-center justify-center p-4 md:p-2 group-hover:opacity-100 opacity-0 transition-opacity duration-300">
+        <a href="${member.link}" target="_blank" rel="noopener noreferrer" class="member-link absolute inset-0 z-30 flex items-center justify-center p-4 md:p-2 group-hover:opacity-100 opacity-0 transition-opacity duration-300">
           <img src="${member.icon}" alt="${member.name}" class="w-full h-full object-contain ${iGlitch} drop-shadow-xl hover:scale-110 transition-transform" />
         </a>
         <div class="absolute inset-0 z-20 flex items-center justify-center pointer-events-none group-hover:opacity-0 transition-opacity duration-300">
@@ -224,7 +226,7 @@ function renderMembers() {
     }
 
     return `
-      <div class="group relative w-full aspect-square cursor-pointer flex items-center justify-center pop-border oto-panel ${shadowClass} transition-colors duration-300 ${member.hoverColorClass || ''}" style="background-color: ${member.bgColor}">
+      <div class="reveal-init member-panel-container group relative w-full aspect-square cursor-pointer flex items-center justify-center pop-border oto-panel ${shadowClass} transition-colors duration-300 ${member.hoverColorClass || ''}" style="background-color: ${member.bgColor}">
         ${contentHtml}
         <div class="absolute inset-x-0 bottom-0 h-1/2 flex items-end justify-center translate-y-full group-hover:translate-y-4 transition-transform duration-200 z-10 pointer-events-none">
            <img src="/mascot.webp" class="w-full h-full object-cover ${mAnim} opacity-80 mix-blend-screen" alt="ひょっこり" />
@@ -232,6 +234,50 @@ function renderMembers() {
       </div>
     `;
   }).join('');
+
+  initMemberScrollAnimations();
+  initMemberTapHandler();
+}
+
+function initMemberScrollAnimations() {
+  gsap.utils.toArray('.reveal-init').forEach((panel) => {
+    gsap.to(panel, {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: panel,
+        start: "top 85%", // When the top of the panel hits 85% of screen height
+        toggleActions: "play none none none"
+      }
+    });
+  });
+}
+
+function initMemberTapHandler() {
+  const isMobile = window.innerWidth < 768;
+  if (!isMobile) return;
+
+  const links = document.querySelectorAll('.member-link');
+  links.forEach(link => {
+    link.addEventListener('click', (e) => {
+      // Prevent immediate navigation to show glitch
+      e.preventDefault();
+      const parent = link.closest('.oto-panel');
+      const href = link.href;
+
+      // Trigger glitch
+      if (parent) {
+        parent.classList.add('is-glitching');
+        // Navigate after a short burst of glitch
+        setTimeout(() => {
+          window.open(href, '_blank');
+          parent.classList.remove('is-glitching');
+        }, 150);
+      }
+    });
+  });
 }
 
 function initHeroAnimations() {
