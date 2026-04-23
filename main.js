@@ -6,7 +6,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 // Members Data DEFINED LOCALLY as requested
 const members = [
-  {name: 'モノクロ', icon: '/monokuro-icon.webp', link: 'https://lit.link/monokuro8neat', color: '#ff66b2'},
+  {name: 'モノクロ', icon: '/monokuro-icon.webp', link: 'https://x.com/neat_ikemen_air?s=21', color: '#ff66b2'},
   {name: '迷走だだだ', icon: '/dadada-icon.webp', link: 'https://x.com/DadadaMeisou?s=20', color: '#ff9933'},
   {name: 'AsaMo', icon: '/asamo-icon.webp', link: 'https://lit.link/asamo', color: '#a0d8ef'},
   {name: '米粒元気', icon: '/kometsubu-icon.webp', link: 'https://www.instagram.com/kometsubugenki/', color: '#ffffff'},
